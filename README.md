@@ -1,1 +1,4 @@
-# project1-group2
+Shital
+Hawke
+Keerthi
+Manuel C.
