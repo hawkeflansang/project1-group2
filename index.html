@@ -7,6 +7,11 @@
   <title>Face Fortune</title>
    <!--link to Bootstrap-->
    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+   <!--Jquery-->
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!--// Firebase!-->
+   <script src="https://www.gstatic.com/firebasejs/7.1.0/firebase-app.js"></script>
+   <script src="https://www.gstatic.com/firebasejs/7.1.0/firebase-database.js"></script>
 </head>
 
 <header>
@@ -14,11 +19,47 @@
 </header>
 
 <body>
-<!--Jquery-->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<!--// Firebase!-->
-<script src="https://www.gstatic.com/firebasejs/7.1.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/7.1.0/firebase-database.js"></script>
+  <!--div for first screen: display just fortune teller and img input fields-->
+  <div class="container">
+    <h1>Title</h1>
+
+    <img src="#" class="teller-image">
+
+    <input type="text" id="user-image-input" value placeholder="Image URL">
+    <input type="submit" id="add-image" value="Tell Me My Fortune">
+
+  </div>
+
+  <!--div for second screen: fortune teller and user image above fortunes being told-->
+  <div class="container">
+    <!--display image of fortune teller and image at top of page-->
+    <div class="row">
+      <img src="#" class="teller-image">
+      <img src="#" id="User-display">
+    </div>
+
+    <!--div for fortunes to be dynamicly added to-->
+
+    <div class="row">
+      <div id="love-life-fortune"></div>
+      <div id="future-happiness-fortune"></div>
+      <div id="advice-fortune"></div>
+      <div id="lottery-fortune"></div>
+    </div>
+
+
+  </div>
+
+  <!--div for fortune ticket print out screen-->
+  <div class="container">
+    <!--adding just divs to hold fortunes again may add extra design elements later on-->
+    <div id="love-life-ticket"></div>
+    <div id="future-happiness-ticket"></div>
+    <div id="advice-ticket"></div>
+    <div id="lottery-ticket"></div>
+
+  </div>
+
 <script src="app.js"></script>
 </body>
 
