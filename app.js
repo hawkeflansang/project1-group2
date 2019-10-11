@@ -162,6 +162,12 @@ var emotionChart = new Chart(myChart, {
   // Age display
   var yourAge = $("<h1>");
   yourAge.text("You are " + age + " years old!");
-  $("#advice-fortune").append(yourAge);
+  $(".giveAdvice").append(yourAge);
+  // creates an h2 tag to append the years left
+  var yearsLeft = $("<h2>");
+  var maxAge = 100;
+  var yearsLeftToLive = maxAge - age;
+  yearsLeft.text("You have " + yearsLeftToLive + " years left to live!");
+  $("#advice-fortune").append(yearsLeft);
   })
 })
