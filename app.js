@@ -1,18 +1,19 @@
 // Initialize Firebase
-const fireBaseConfig = {
-    apiKey: "AIzaSyDcGIF003vq_0dk2gmdB8WkpmcYqgdKAwQ",
-    authDomain: "coders-bay-872ba.firebaseapp.com",
-    databaseURL: "https://coders-bay-872ba.firebaseio.com",
-    projectId: "coders-bay-872ba",
-    storageBucket: "",
-    messagingSenderId: "821809220618",
-    appId: "1:821809220618:web:f40afa614663b61f8ba3f3"
+  var firebaseConfig = {
+    apiKey: "AIzaSyBh9sM9L8VJMXRhvYBCF7sps-TWicxoEXI",
+    authDomain: "face-fortune-bdb7d.firebaseapp.com",
+    databaseURL: "https://face-fortune-bdb7d.firebaseio.com",
+    projectId: "face-fortune-bdb7d",
+    storageBucket: "face-fortune-bdb7d.appspot.com",
+    messagingSenderId: "406991950936",
+    appId: "1:406991950936:web:f53feaab8eb621a045a62d"
   };
 
  firebase.initializeApp(fireBaseConfig);
 
 // Get a reference to the database service
   var database = firebase.database();
+  var imageURL = "https://www.kiplinger.com/kipimages/pages/18048.jpg";
 
 // // API keys
 // var facePlusPlusKey = "4EanX2TJZ2DZRgACyoP4etY4X7Qxa67n";
@@ -56,7 +57,7 @@ const fireBaseConfig = {
   var settings = {
 	"async": true,
 	"crossDomain": true,
-	"url": "https://faceplusplus-faceplusplus.p.rapidapi.com/facepp/v3/detect?return_attributes=gender%2Cage%2Csmiling%2Cfacequality%2Cblur&image_url=https://www.kiplinger.com/kipimages/pages/18048.jpg",
+	"url": "https://faceplusplus-faceplusplus.p.rapidapi.com/facepp/v3/detect?return_attributes=gender%2Cage%2Csmiling%2Cfacequality%2Cblur&image_url=" + imageURL,
 	"method": "POST",
 	"headers": {
 		"x-rapidapi-host": "faceplusplus-faceplusplus.p.rapidapi.com",
