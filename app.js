@@ -11,9 +11,91 @@
 
   firebase.initializeApp(fireBaseConfig);
 
-// Get a reference to the database service
+  // Get a reference to the database service
   var database = firebase.database();
-  var imageURL = "https://www.kiplinger.com/kipimages/pages/18048.jpg";
+
+  // An on click function to make an AJAX call and set the image URL as 
+  $("#add-image").on("click", function(event) {
+    var imageURL = $("#user-image-input").val().trim();
+  
+
+  var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "https://faceplusplus-faceplusplus.p.rapidapi.com/facepp/v3/detect?return_attributes=gender%2Cage%2Csmiling%2Cfacequality%2Cblur%2Cbeauty%2Cemotion%2Cfacequality%2Cethnicity%2Cskinstatus&image_url=" + imageURL,
+    "method": "POST",
+    "headers": {
+      "x-rapidapi-host": "faceplusplus-faceplusplus.p.rapidapi.com",
+      "x-rapidapi-key": "436517c447msh97cde90ad4dc1e8p10f577jsn59a377f7b533",
+      "content-type": "application/x-www-form-urlencoded"
+    },
+    "data": {}
+  }
+  
+  $.ajax(settings).done(function (response) {
+      // Console log the values
+      console.log(response);
+      // Store different attributes into variables using a for loop
+      var emotions = ["anger", "disgust", "fear", "happiness", "neutral", "sadness", "surprised"];
+
+      console.log(response.faces[0].attributes.emotion);
+      // Different variables for each emotion
+      var anger = response.faces[0].attributes.emotion.anger;
+      var disgust = response.faces[0].attributes.emotion.disgust;
+      var fear = response.faces[0].attributes.emotion.fear;
+      var happiness = response.faces[0].attributes.emotion.happiness;
+      var neutral = response.faces[0].attributes.emotion.neutral;
+      var sadness = response.faces[0].attributes.emotion.sadness;
+      var surprised = response.faces[0].attributes.emotion.surprise;
+      var beauty = response.faces[0].attributes.beauty;
+
+      // Canvas 
+
+var myChart = document.getElementById('myChart').getContext('2d');
+//Global options
+Chart.defaults.global.defaultFontFamily = 'Lato';
+Chart.defaults.global.defaultFontSize = 18;
+Chart.defaults.global.defaultFontColor = '#777';
+
+//data for creating the chart
+
+var emotionChart = new Chart(myChart, {
+  type: 'line', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
+  data: {
+    labels: ['Anger', 'Disgust', 'Fear', 'Happiness', 'Neutral', 'Sadness', 'Surprise'],
+    datasets: [{
+      label: 'Emotions',
+      data: [anger, disgust, fear, happiness, neutral, sadness, surprised],
+      backgroundColor: [
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(255, 206, 86, 0.2)',
+        'rgba(75, 192, 192, 0.2)',
+        'rgba(153, 102, 255, 0.2)',
+        'rgba(255, 159, 64, 0.2)',
+        'rgba(75, 192, 192, 0.2)'
+      ],
+      borderColor: [
+        'rgba(255, 99, 132, 1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(255, 206, 86, 1)',
+        'rgba(75, 192, 192, 1)',
+        'rgba(153, 102, 255, 1)',
+        'rgba(255, 159, 64, 1)',
+        'rgba(75, 192, 192, 1)'
+      ],
+      borderWidth: 2,
+      hoverBorderWidth: 3,
+      hoverBorderColor: 'yellow'
+
+    }]
+  },
+  options: {}
+});
+  })
+})
+
+
 
 // // API keys
 // var facePlusPlusKey = "4EanX2TJZ2DZRgACyoP4etY4X7Qxa67n";
@@ -54,19 +136,3 @@
 //       console.log(error.error_message);
 //   })
 
-  var settings = {
-	"async": true,
-	"crossDomain": true,
-	"url": "https://faceplusplus-faceplusplus.p.rapidapi.com/facepp/v3/detect?return_attributes=gender%2Cage%2Csmiling%2Cfacequality%2Cblur&image_url=" + imageURL,
-	"method": "POST",
-	"headers": {
-		"x-rapidapi-host": "faceplusplus-faceplusplus.p.rapidapi.com",
-		"x-rapidapi-key": "436517c447msh97cde90ad4dc1e8p10f577jsn59a377f7b533",
-		"content-type": "application/x-www-form-urlencoded"
-	},
-	"data": {}
-}
-
-$.ajax(settings).done(function (response) {
-    console.log(response);
-})
