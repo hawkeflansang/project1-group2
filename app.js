@@ -17,7 +17,12 @@
   // An on click function to make an AJAX call and set the image URL as 
   $("#add-image").on("click", function(event) {
     var imageURL = $("#user-image-input").val().trim();
-  
+
+    // display the user image and append it to a div
+    var userImage = $("<img>");
+    userImage.attr("src", imageURL);
+    $("#userDisplay").append(userImage);
+
 
   var settings = {
     "async": true,
@@ -47,17 +52,22 @@
       var neutral = response.faces[0].attributes.emotion.neutral;
       var sadness = response.faces[0].attributes.emotion.sadness;
       var surprised = response.faces[0].attributes.emotion.surprise;
-      var beauty = response.faces[0].attributes.beauty;
+      var maleScore = response.faces[0].attributes.beauty.male_score;
+      var femaleScore = response.faces[0].attributes.beauty.female_score;
+      var skinHealth =Math.floor(response.faces[0].attributes.skinstatus.health);
+      var gender = response.faces[0].attributes.gender.value;
+      var age = response.faces[0].attributes.age.value;
+      console.log(age);
 
+      
       // Canvas 
-
 var myChart = document.getElementById('myChart').getContext('2d');
 //Global options
 Chart.defaults.global.defaultFontFamily = 'Lato';
 Chart.defaults.global.defaultFontSize = 18;
 Chart.defaults.global.defaultFontColor = '#777';
 
-//data for creating the chart
+//data for creating the emotions chart
 
 var emotionChart = new Chart(myChart, {
   type: 'line', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
@@ -92,47 +102,72 @@ var emotionChart = new Chart(myChart, {
   },
   options: {}
 });
+
+ // Beauty Canvas 
+ var myChart = document.getElementById('beautyChart').getContext('2d');
+ //Global options
+ Chart.defaults.global.defaultFontFamily = 'Lato';
+ Chart.defaults.global.defaultFontSize = 18;
+ Chart.defaults.global.defaultFontColor = '#777';
+ 
+ //data for creating the emotions chart
+ var beautyChart = new Chart(myChart, {
+   type: 'doughnut', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
+   data: {
+     labels: ['Female Score', 'Male Score'],
+     datasets: [{
+       label: 'Beauty',
+       data: [maleScore, femaleScore],
+       backgroundColor: [
+         'rgba(255, 99, 132, 0.2)',
+         'rgba(54, 162, 235, 0.2)',
+         'rgba(255, 206, 86, 0.2)',
+         'rgba(75, 192, 192, 0.2)',
+         'rgba(153, 102, 255, 0.2)',
+         'rgba(255, 159, 64, 0.2)',
+         'rgba(75, 192, 192, 0.2)'
+       ],
+       borderColor: [
+         'rgba(255, 99, 132, 1)',
+         'rgba(54, 162, 235, 1)',
+         'rgba(255, 206, 86, 1)',
+         'rgba(75, 192, 192, 1)',
+         'rgba(153, 102, 255, 1)',
+         'rgba(255, 159, 64, 1)',
+         'rgba(75, 192, 192, 1)'
+       ],
+       borderWidth: 2,
+       hoverBorderWidth: 3,
+       hoverBorderColor: 'yellow'
+ 
+     }]
+   },
+   options: {}
+ });
+
+  // Health display
+    if (skinHealth > 50)
+    {
+       var skinHealthDiv = $("<h1>");
+       skinHealthDiv.text("Your skin is very healthy!");
+       $("#advice-fortune").append(skinHealthDiv);
+    }
+    else 
+    {
+      var skinHealthDiv = $("<h1>");
+      skinHealthDiv.text("Try using L'Oreal skin care moisturizer!");
+      $("#advice-fortune").append(skinHealthDiv);
+    }
+
+  // Age display
+  var yourAge = $("<h1>");
+  yourAge.text("You are " + age + " years old!");
+  $(".giveAdvice").append(yourAge);
+  // creates an h2 tag to append the years left
+  var yearsLeft = $("<h2>");
+  var maxAge = 100;
+  var yearsLeftToLive = maxAge - age;
+  yearsLeft.text("You have " + yearsLeftToLive + " years left to live!");
+  $("#advice-fortune").append(yearsLeft);
   })
 })
-
-
-
-// // API keys
-// var facePlusPlusKey = "4EanX2TJZ2DZRgACyoP4etY4X7Qxa67n";
-// var facePlusPlusSecret = "S3SJ9hQ1opCQ5t8Ay0RvPEQwCOL8KLEn";
-// var cloudinaryKey = "692911896881458";
-// var queryURL = "https://api-us.faceplusplus.com/facepp/v3/detect";
-// var imageURL = "https://imgur.com/gallery/6149dFk";
-// var imageFile = './IMG_1389';
-
-// // Image upload
-// // var url = "https://api-us.faceplusplus.com/facepp/v3/detect";
-// // request({
-// //     uri: url,
-// //     method: 'POST',
-// //     qs: {
-// //         api_secret: facePlusPlusSecret,
-// //         api_key: facePlusPlusKey,
-// //         image_url: imageURL
-// //     }
-// // });
-
-// var queryURL = queryURL + "?api_key=" + facePlusPlusKey + "&api_secret=" + facePlusPlusSecret + "&image_file=" + imageFile; 
-// $.ajax({
-//     url: queryURL,
-//     method: "POST",
-// //     data: {
-// //         api_secret: facePlusPlusSecret,
-// //         api_key: facePlusPlusKey,
-// //         image_file: './IMG_1389'         
-// //    }
-//   })
-
-//   .then(function(response) {
-//       console.log(response) 
-//   })
-  
-//   .catch(function(error)  {
-//       console.log(error.error_message);
-//   })
-
