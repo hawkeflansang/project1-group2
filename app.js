@@ -1,5 +1,5 @@
 // Initialize Firebase
-  var firebaseConfig = {
+  var fireBaseConfig = {
     apiKey: "AIzaSyBh9sM9L8VJMXRhvYBCF7sps-TWicxoEXI",
     authDomain: "face-fortune-bdb7d.firebaseapp.com",
     databaseURL: "https://face-fortune-bdb7d.firebaseio.com",
@@ -9,7 +9,7 @@
     appId: "1:406991950936:web:f53feaab8eb621a045a62d"
   };
 
- firebase.initializeApp(fireBaseConfig);
+  firebase.initializeApp(fireBaseConfig);
 
 // Get a reference to the database service
   var database = firebase.database();
