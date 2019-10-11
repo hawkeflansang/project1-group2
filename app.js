@@ -11,9 +11,40 @@
 
   firebase.initializeApp(fireBaseConfig);
 
-// Get a reference to the database service
+  // Get a reference to the database service
   var database = firebase.database();
-  var imageURL = "https://www.kiplinger.com/kipimages/pages/18048.jpg";
+
+  // An on click function to make an AJAX call and set the image URL as 
+  $("#add-image").on("click", function(event) {
+    var imageURL = $("#user-image-input").val().trim();
+  
+
+  var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "https://faceplusplus-faceplusplus.p.rapidapi.com/facepp/v3/detect?return_attributes=gender%2Cage%2Csmiling%2Cfacequality%2Cblur%2Cbeauty%2Cemotion%2Cfacequality%2Cethnicity%2Cskinstatus&image_url=" + imageURL,
+    "method": "POST",
+    "headers": {
+      "x-rapidapi-host": "faceplusplus-faceplusplus.p.rapidapi.com",
+      "x-rapidapi-key": "436517c447msh97cde90ad4dc1e8p10f577jsn59a377f7b533",
+      "content-type": "application/x-www-form-urlencoded"
+    },
+    "data": {}
+  }
+  
+  $.ajax(settings).done(function (response) {
+      // Console log the values
+      console.log(response);
+      // Store different attributes into variables
+      var emotions = response.faces[0].attributes.emotion;
+      console.log(emotions);
+      var beauty = response.faces[0].attributes.beauty;
+  })
+
+
+})
+
+
 
 // // API keys
 // var facePlusPlusKey = "4EanX2TJZ2DZRgACyoP4etY4X7Qxa67n";
@@ -54,19 +85,3 @@
 //       console.log(error.error_message);
 //   })
 
-  var settings = {
-	"async": true,
-	"crossDomain": true,
-	"url": "https://faceplusplus-faceplusplus.p.rapidapi.com/facepp/v3/detect?return_attributes=gender%2Cage%2Csmiling%2Cfacequality%2Cblur&image_url=" + imageURL,
-	"method": "POST",
-	"headers": {
-		"x-rapidapi-host": "faceplusplus-faceplusplus.p.rapidapi.com",
-		"x-rapidapi-key": "436517c447msh97cde90ad4dc1e8p10f577jsn59a377f7b533",
-		"content-type": "application/x-www-form-urlencoded"
-	},
-	"data": {}
-}
-
-$.ajax(settings).done(function (response) {
-    console.log(response);
-})
