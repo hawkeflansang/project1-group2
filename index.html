@@ -22,21 +22,16 @@
     <script src="https://www.gstatic.com/firebasejs/7.1.0/firebase-database.js"></script>
     <!--Jquery-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    
-  
-  </head>
+</head>
 
 <header>
-
+    <h1>Face Fortune</h1>
 </header>
 
 <body>
   <!--div for first screen: display just fortune teller and img input fields-->
   <div class="container">
-    <h1>Title</h1>
-
     <img src="#" class="teller-image">
-
     <input type="url" id="user-image-input" value placeholder="Image URL">
     <input type="submit" id="add-image" value="Tell Me My Fortune">
 
@@ -47,7 +42,8 @@
     <!--display image of fortune teller and image at top of page-->
     <div class="row">
       <img src="#" class="teller-image">
-      <img src="#" id="User-display">
+      <div id = "userDisplay">
+      </div>
     </div>
 
     <!--div for fortunes to be dynamicly added to-->
@@ -73,6 +69,7 @@
   </div>
 
   <canvas id="myChart"></canvas>
+  <canvas id ="beautyChart"></canvas>
 
   <!--JS File-->
    <script src="./app.js"></script>
