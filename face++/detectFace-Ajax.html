@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Detect Face</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- <script type="text/javascript" src="facepp_sdk/jquery.min.js"></script>
+    <script type="text/javascript" src="facepp_sdk/exif.js"></script>
+    <script type="text/javascript" src="facepp_sdk/facepp_sdk.js"></script> -->
+
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <script type="text/javascript" src="common.js"></script>
+    <link rel="stylesheet" type="text/css" href="common.css" />
+  </head>
+
+  <style>
+    #input {
+      opacity: 0;
+    }
+
+    #facesContainer {
+      position: absolute;
+      top: 84px;
+      width: 320px;
+      height: 320px;
+      line-height: 320px;
+      left: 0;
+      right: 0;
+      background-color: darkgray;
+      text-align: center;
+      margin: 0 auto;
+    }
+
+    #preview {
+      vertical-align: middle;
+      max-width: 100%;
+      max-height: 100%;
+    }
+
+    #text {
+      left: 5%;
+      position: absolute;
+      top: 414px;
+      width: 90%;
+      bottom: 10px;
+    }
+  </style>
+
+  <body>
+    <div class="container">
+      <div class="button" onclick="clickInput()">
+        Click here to upload Your Picture
+      </div>
+
+      <input
+        id="input"
+        type="file"
+        accept="image/*"
+        name="jyh"
+        onchange="selectImage(this)"
+      />
+
+      <div id="facesContainer">
+        <img id="preview" />
+      </div>
+
+      <textarea id="text" readonly="readonly"></textarea>
+    </div>
+  </body>
+</html>
+
+<script>
+  resetContainer();
+
+  function clickInput() {
+    console.log("clickInput");
+    document.getElementById("input").click();
+  }
+</script>
+
+<script>
+
+  function selectImage(input) {
+    console.log("selectImage");
+
+    let imageView = document.getElementById("preview");
+
+    const reader = new FileReader();
+
+    reader.readAsDataURL(input.files[0]);
+
+    reader.onload = function(e) {
+      $("#facesContainer div").remove();
+
+      const base64Image = e.target.result;
+
+      let imageView = document.getElementById("preview");
+      
+      // Display pic in preview
+      imageView.src = base64Image;
+
+      let attributes =
+        "gender,age,smiling,headpose,facequality,blur,eyestatus,emotion,ethnicity,beauty,mouthstatus,eyegaze,skinstatus";
+
+      var url = `https://cors-anywhere.herokuapp.com/https://api-us.faceplusplus.com/facepp/v3/detect`;
+      var apiKey = "slbEexiAvP0-siSLrFM2dh7_DFIwZIwm";
+      var apiSecret = "Zs3cWFPK2IYbg4o8PNJYdquP9tXbigZ2";
+      //var url = "https://api-us.faceplusplus.com/facepp/v3/detect";
+      var dic = {
+        image_base64: base64Image,
+        //image_file: imageData,
+        return_landmark: 2,
+        return_attributes: attributes
+      };
+
+      // {{ facepp_sdk
+      const formData = new FormData();
+
+      formData.append("api_key", apiKey);
+      formData.append("api_secret", apiSecret);
+
+      for (var key in dic) {
+        formData.append(key, dic[key]);
+      }
+      console.log(formData);
+
+      $.ajax({
+        url: url,
+        type: "POST",
+        cache: false,
+        data: formData,
+        processData: false,
+        contentType: false,
+        timeout: 20000 // timeout in secs
+      })
+      .done(success)
+      .fail(failed);
+      // }} facepp_sdk
+    };
+  }
+
+  function success(e) {
+    console.log(e);
+    let textView = document.getElementById("text");
+    textView.innerText = JSON.stringify(e, null, "\t");
+
+    let imageView = document.getElementById("preview");
+
+    const faces = e.faces;
+
+    for (const index in faces) {
+      const face = faces[index];
+      const face_rectangle = face.face_rectangle;
+
+      var roll = face.attributes.headpose.roll_angle;
+
+      var gender = face.attributes.gender.value;
+
+      const borderColor = gender == "Male" ? "blue" : "red";
+
+      console.log("Facial color：" + borderColor);
+
+      var faceX = face_rectangle.left;
+      var faceY = face_rectangle.top;
+      var faceW = face_rectangle.width;
+      var faceH = face_rectangle.height;
+
+      var width = 320;
+      var height = 320;
+
+      //imgSize
+      var imageW = imageView.width;
+      var imageH = imageView.height;
+
+      var naturalWidth = imageView.naturalWidth;
+      var naturalHeight = imageView.naturalHeight;
+
+      console.log("containerSize " + width + "----" + height);
+      console.log("imgSiuze " + imageW + "----" + imageH);
+      console.log("picActualSize " + naturalWidth + "----" + imageH);
+
+      const scale = imageW / naturalWidth;
+
+      console.log("scale > " + scale);
+
+      const offsetX = (width - imageW) * 0.5;
+      const offsetY = (height - imageH) * 0.5;
+
+      console.log("offsetX： " + offsetX + "offsetY" + offsetY);
+
+      $("<div/>")
+        .css({
+          position: "absolute",
+          top: faceY * scale + offsetY,
+          left: faceX * scale + offsetX,
+          height: faceH * scale,
+          width: faceW * scale,
+          border: "2px solid " + borderColor,
+          transform: "rotate(" + roll + "deg)"
+        })
+        .appendTo($("#facesContainer"));
+    }
+  }
+
+  function failed(e) {
+    console.log(e);
+    let textView = document.getElementById("text");
+    textView.innerText = JSON.stringify(e);
+  }
+</script>
