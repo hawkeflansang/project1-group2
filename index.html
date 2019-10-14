@@ -3,28 +3,37 @@
 
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
   <!--Title-->
   <title>Face Fortune</title>
+
+      <!--Chart.js-->
+      <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.css"></script>-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+
    <!--link to Bootstrap-->
    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-   <!--Jquery-->
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <!--// Firebase!-->
-   <script src="https://www.gstatic.com/firebasejs/7.1.0/firebase-app.js"></script>
-   <script src="https://www.gstatic.com/firebasejs/7.1.0/firebase-database.js"></script>
+   <!--CSS-->
+   <link rel="stylesheet" href="style.css"> 
+   <!--// Firebase!-->
+    <script src="https://www.gstatic.com/firebasejs/7.1.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.1.0/firebase-database.js"></script>
+    <!--Jquery-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 
 <header>
-
+    <h1>Face Fortune</h1>
 </header>
 
 <body>
   <!--div for first screen: display just fortune teller and img input fields-->
   <div class="container">
-    <h1>Title</h1>
-
     <img src="#" class="teller-image">
-
+    <!--<label for="user-image-upload" class="btn">Upload Image</label>-->
+    <input type="file" id="user-image-upload" value="Upload Image" accept="image/*" >
     <input type="url" id="user-image-input" value placeholder="Image URL">
     <input type="submit" id="add-image" value="Tell Me My Fortune">
 
@@ -35,7 +44,8 @@
     <!--display image of fortune teller and image at top of page-->
     <div class="row">
       <img src="#" class="teller-image">
-      <img src="#" id="User-display">
+      <div id = "userDisplay">
+      </div>
     </div>
 
     <!--div for fortunes to be dynamicly added to-->
@@ -43,7 +53,7 @@
     <div class="row">
       <div id="love-life-fortune"></div>
       <div id="future-happiness-fortune"></div>
-      <div id="advice-fortune"></div>
+      <div class = "giveAdvice" id="advice-fortune"></div>
       <div id="lottery-fortune"></div>
     </div>
 
@@ -60,7 +70,11 @@
 
   </div>
 
-<script src="app.js"></script>
+  <canvas id="myChart"></canvas>
+  <canvas id ="beautyChart"></canvas>
+
+  <!--JS File-->
+   <script src="./app.js"></script>
 </body>
 
 </html>
