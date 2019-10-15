@@ -1,0 +1,86 @@
+body {
+    background: linear-gradient(#4c1c54, #8b3b99 ) no-repeat center center fixed;
+    background-size: cover;
+    color: #f9a825;
+}
+
+header {
+    text-align: center;
+}
+
+.teller-image {
+    height: 500px;
+    margin: 20px;
+
+}
+.clearfix {
+    overflow: auto;
+}
+
+#hold{
+    margin-right: auto;
+    margin-left: auto;
+}
+
+#opening-screen {
+    position: absolute;
+    z-index: 1;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px;
+}
+
+#opening-image{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    float: none;
+}
+
+#add-image {
+    height: 100px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#fortune-screen {
+    position: absolute;
+    visibility: hidden;
+    z-index: 2;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px;
+}
+
+#fortune-image {
+    height: 300px;
+}
+
+#user-image {
+    height: 300px;
+}
+
+#take-ticket{
+    visibility: hidden;
+    position: absolute;
+    z-index: 3;
+}
+
+#myChart {
+    visibility: hidden;
+    position: absolute;
+    z-index: 1;
+}
+
+#beautyChart {
+    visibility: hidden;
+    position: absolute;
+    z-index: 2;
+}
+
+#final-ticket {
+    visibility: hidden;
+    position: absolute;
+    z-index: 3;
+}
