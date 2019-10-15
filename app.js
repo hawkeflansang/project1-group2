@@ -259,7 +259,7 @@ const widget = cloudinary.createUploadWidget(
     var min=0; 
     var max=50;  
     var randomNumber = Math.floor(Math.random() * (+max - +min) + +min);
-    var fortuneURL = "http://fortunecookieapi.herokuapp.com/v1/fortunes?limit=1&skip=" + randomNumber + "&page=" + randomNumber;
+    var fortuneURL = "https://fortunecookieapi.herokuapp.com/v1/fortunes?limit=1&skip=" + randomNumber + "&page=" + randomNumber;
     console.log(fortuneURL)
     $.ajax({
       url: fortuneURL,
