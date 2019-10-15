@@ -215,19 +215,6 @@ const widget = cloudinary.createUploadWidget(
   }
 );
 
-  // Advice
-//   function giveAdvice() {
-//   var adviceURL = "https://api.adviceslip.com/advice";
-//   $.ajax({
-//     url: adviceURL,
-//     method: "GET"
-// }).then(function(response) {
-//     var results = response;
-//     $("#advice-ticket").append(response)
-//     return results;
-// })
-// }
-
   // Fortune
   function fortuneTelling(){
 
