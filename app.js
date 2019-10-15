@@ -1,19 +1,3 @@
-// Initialize Firebase
-var fireBaseConfig = {
-  apiKey: "AIzaSyBh9sM9L8VJMXRhvYBCF7sps-TWicxoEXI",
-  authDomain: "face-fortune-bdb7d.firebaseapp.com",
-  databaseURL: "https://face-fortune-bdb7d.firebaseio.com",
-  projectId: "face-fortune-bdb7d",
-  storageBucket: "face-fortune-bdb7d.appspot.com",
-  messagingSenderId: "406991950936",
-  appId: "1:406991950936:web:f53feaab8eb621a045a62d"
-};
-
-firebase.initializeApp(fireBaseConfig);
-
-// Get a reference to the database service
-var database = firebase.database();
-
 //Cloudinary :
 const widget = cloudinary.createUploadWidget(
   {
@@ -187,15 +171,19 @@ const widget = cloudinary.createUploadWidget(
         });
 
         // Displays the health of a person's skin 
-        if (skinHealth > 50) {
+        if (skinHealth > 1) {
           var skinHealthDiv = $("<h1>");
-          skinHealthDiv.text("Your skin is very healthy!");
+          skinHealthDiv.text("Your skin is very healthy! Wow!");
           $("#advice-fortune").append(skinHealthDiv);
+          var healthySkin = true; // a boolean for healthy skin, used to help calculate life expectancy
+          console.log(skinHealth);
         }
         else {
           var skinHealthDiv = $("<h1>");
-          skinHealthDiv.text("Try using L'Oreal skin care moisturizer!");
+          skinHealthDiv.text("Your skin is average. You should try using L'Oreal skin care moisturizer!");
           $("#advice-fortune").append(skinHealthDiv);
+          var healthySkin = false; // a boolean for healthy skin, used to help calculate life expectancy
+          console.log(skinHealth);
         }
 
         // Displays the age of a person
@@ -205,35 +193,47 @@ const widget = cloudinary.createUploadWidget(
 
         // Displays the number of years left to live
         var yearsLeft = $("<h2>");
-        var maxAge = 100; // Assume the max age for a person to be alive
-        var yearsLeftToLive = maxAge - age;
-        yearsLeft.text("You have " + yearsLeftToLive + " years left to live!");
-        $("#advice-fortune").append(yearsLeft);
-      })
 
+        // make life expectancy shorter or longer based on skin health
+        if (healthySkin === true) {
+          var yearsLeftToLive = Math.floor(Math.random() * (+60 - +20) + +20);
+          yearsLeft.text("You have " + yearsLeftToLive + " years left to live!");
+          $("#advice-fortune").append(yearsLeft);
+        }
+        else
+        { // if skin is unhealthy the range is lower
+          var yearsLeftToLive = Math.floor(Math.random() * (+50 - +10) + +10);
+          yearsLeft.text("You have " + yearsLeftToLive + " years left to live!");
+          $("#advice-fortune").append(yearsLeft);
+        }
+      })
+      // Call the fortune teller API
+      fortuneTelling();
     }
   }
 );
 
   // Fortune
   function fortuneTelling(){
+    var min=0; 
+    var max=50;  
+    var randomNumber = Math.floor(Math.random() * (+max - +min) + +min);
+    var fortuneURL = "http://fortunecookieapi.herokuapp.com/v1/fortunes?limit=1&skip=" + randomNumber + "&page=" + randomNumber;
+    console.log(fortuneURL)
+    $.ajax({
+      url: fortuneURL,
+      method: "GET"
+    }).then(function(response) {
+      $("#advice-ticket").append(response[0].message);
+    })
+  }
+  
+  // An on click function to make an AJAX call and set the image URL as 
+  $("#add-image").on("click", function (event) {
+    widget.open();
+  });
 
-  var min=0; 
-  var max=50;  
-  var randomNumber = Math.floor(Math.random() * (+max - +min) + +min);
-  var fortuneURL = "http://fortunecookieapi.herokuapp.com/v1/fortunes?limit=1&skip=" + randomNumber + "&page=" + randomNumber;
-  console.log(fortuneURL)
-  $.ajax({
-    url: fortuneURL,
-    method: "GET"
-  }).then(function(response) {
-    $("#advice-ticket").append(response[0].message);
-  })
+// print button
+function printFunction() {
+  window.print();
 }
-
-// An on click function to make an AJAX call and set the image URL as 
-$("#add-image").on("click", function (event) {
-  widget.open();
-  $("#advice-ticket").empty();
-  fortuneTelling();
-});
