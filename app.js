@@ -1,3 +1,8 @@
+//gif change
+var staticImage = setTimeout(function() {
+  $("#opening-image").attr("src","images/fortuneOnStill.png");
+}, 5000);
+
 //Cloudinary :
 const widget = cloudinary.createUploadWidget(
   {
@@ -37,7 +42,7 @@ const widget = cloudinary.createUploadWidget(
 
       // display the user image and append it to a div
       var userImage = $("<img>");
-      userImage.attr("src", imageURL);
+      userImage.attr({"src": imageURL, "id": "user-image"});
       $("#userDisplay").append(userImage);
 
       //api key from rapidapi for faceplusplus
@@ -80,6 +85,18 @@ const widget = cloudinary.createUploadWidget(
         var skinHealth = Math.floor(response.faces[0].attributes.skinstatus.health);
         var gender = response.faces[0].attributes.gender.value;
         var age = response.faces[0].attributes.age.value;
+
+        //add emotion to table
+        var newRow = $("<tr>").append(
+          $("<td>").text(anger + "%"),
+          $("<td>").text(disgust + "%"),
+          $("<td>").text(fear + "%"),
+          $("<td>").text(happiness + "%"),
+          $("<td>").text(neutral + "%"),
+          $("<td>").text(sadness + "%"),
+          $("<td>").text(surprised + "%"),
+        );
+        $("#emotion-readout > tbody").append(newRow);
 
 
         // Chart.js is used to display the emotion of the picture uploaded by the user
@@ -170,42 +187,66 @@ const widget = cloudinary.createUploadWidget(
           options: {}
         });
 
-        // Displays the health of a person's skin 
-        if (skinHealth > 1) {
-          var skinHealthDiv = $("<h1>");
-          skinHealthDiv.text("Your skin is very healthy! Wow!");
-          $("#advice-fortune").append(skinHealthDiv);
-          var healthySkin = true; // a boolean for healthy skin, used to help calculate life expectancy
-          console.log(skinHealth);
-        }
-        else {
-          var skinHealthDiv = $("<h1>");
-          skinHealthDiv.text("Your skin is average. You should try using L'Oreal skin care moisturizer!");
-          $("#advice-fortune").append(skinHealthDiv);
-          var healthySkin = false; // a boolean for healthy skin, used to help calculate life expectancy
-          console.log(skinHealth);
-        }
+        // Displays the health of a person's skin
+        var healthySkin = true;
+        var callSkin = setTimeout(function(){ 
+          if (skinHealth > 1) {
+            var skinHealthDiv = $("<h1>");
+            skinHealthDiv.text("Your skin is very healthy! Wow!");
+            $("#advice-fortune").empty();
+            $("#advice-fortune").append(skinHealthDiv);
+            healthySkin = true; // a boolean for healthy skin, used to help calculate life expectancy
+            console.log(skinHealth);
+          }
+          else {
+            var skinHealthDiv = $("<h1>");
+            skinHealthDiv.text("Your skin is average. You should try using L'Oreal skin care moisturizer!");
+            $("#advice-fortune").empty();
+            $("#advice-fortune").append(skinHealthDiv);
+            healthySkin = false; // a boolean for healthy skin, used to help calculate life expectancy
+            console.log(skinHealth);
+          }}, 9000)
 
         // Displays the age of a person
         var yourAge = $("<h1>");
         yourAge.text("You are " + age + " years old!");
-        $(".giveAdvice").append(yourAge);
+        var callAge = setTimeout(function() {
+            $("#advice-fortune").append(yourAge);
+            $("#advice-ticket").append("Your Age:" + age);
+          }, 3000);
 
         // Displays the number of years left to live
         var yearsLeft = $("<h2>");
 
         // make life expectancy shorter or longer based on skin health
-        if (healthySkin === true) {
-          var yearsLeftToLive = Math.floor(Math.random() * (+60 - +20) + +20);
-          yearsLeft.text("You have " + yearsLeftToLive + " years left to live!");
-          $("#advice-fortune").append(yearsLeft);
-        }
-        else
-        { // if skin is unhealthy the range is lower
-          var yearsLeftToLive = Math.floor(Math.random() * (+50 - +10) + +10);
-          yearsLeft.text("You have " + yearsLeftToLive + " years left to live!");
-          $("#advice-fortune").append(yearsLeft);
-        }
+        var callTimeLeft = setTimeout(function() {
+          if (healthySkin === true) {
+            var yearsLeftToLive = Math.floor(Math.random() * (+60 - +20) + +20);
+            yearsLeft.text("You have " + yearsLeftToLive + " years left to live!");
+            $("#advice-fortune").empty();
+            $("#advice-fortune").append(yearsLeft);
+          }
+          else
+          { // if skin is unhealthy the range is lower
+            var yearsLeftToLive = Math.floor(Math.random() * (+50 - +10) + +10);
+            yearsLeft.text("You have " + yearsLeftToLive + " years left to live!");
+            $("#advice-fortune").empty();
+            $("#advice-fortune").append(yearsLeft);
+          }}, 6000);
+      var callEmotions = setTimeout(function() {
+          $("#advice-fortune").empty();
+          document.getElementById("myChart").style.visibility = "visible";
+      }, 12000);
+
+      var callBeauty = setTimeout(function() {
+        document.getElementById("myChart").style.visibility = "hidden";
+        document.getElementById("beautyChart").style.visibility = "visible";
+      }, 18000);
+
+      var takeTicket = setTimeout(function() {
+        document.getElementById("beautyChart").style.visibility = "hidden";
+        document.getElementById("take-ticket").style.visibility = "visible";
+      },24000);
       })
       // Call the fortune teller API
       fortuneTelling();
@@ -231,7 +272,15 @@ const widget = cloudinary.createUploadWidget(
   // An on click function to make an AJAX call and set the image URL as 
   $("#add-image").on("click", function (event) {
     widget.open();
+    document.getElementById("opening-screen").style.visibility = "hidden";
+    document.getElementById("fortune-screen").style.visibility = "visible";
   });
+
+  $("#take-ticket").on("click", function(event) {
+    document.getElementById("fortune-screen").style.visibility = "hidden";
+    document.getElementById("final-ticket").style.visibility = "visible";
+    document.getElementById("take-ticket").style.visibility = "hidden";
+  })
 
 // print button
 function printFunction() {

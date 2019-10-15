@@ -17,6 +17,8 @@
   <!-- Bootstrap File -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!--CSS-->
+  <link rel="stylesheet" href="style.css">
 
   <!--// Firebase!-->
   <script src="https://www.gstatic.com/firebasejs/7.1.0/firebase-app.js"></script>
@@ -31,44 +33,64 @@
 
 <body>
   <!--div for first screen: display just fortune teller and img input fields-->
-  <div class="container">
-    <img src="#" class="teller-image">
-    <input type="submit" id="add-image" value="Tell Me My Fortune">
+  <div class="container" id="hold">
+
+  <div class="container" id="opening-screen">
+    <img src="images/foretuneOn.gif" class="teller-image" id="opening-image">
+    <input type="image" src="images/crystalBall.png" id="add-image" value="Tell Me My Fortune">
   </div>
 
   <!--div for second screen: fortune teller and user image above fortunes being told-->
-  <div class="container">
+  <div class="container" id="fortune-screen">
     <!--display image of fortune teller and image at top of page-->
     <div class="row">
-      <img src="#" class="teller-image">
+      <img src="images/foretuneTelling.gif" class="teller-image" id="fortune-image">
       <div id="userDisplay">
       </div>
     </div>
 
     <!--div for fortunes to be dynamicly added to-->
     <div class="row">
+      <div><input type="image" src="images/crystalBall.png" id="take-ticket"></div>
       <div id="love-life-fortune"></div>
       <div id="future-happiness-fortune"></div>
       <div class="giveAdvice" id="advice-fortune"></div>
       <div id="lottery-fortune"></div>
+      <!-- canvas to display the Chart-->
+      <canvas id="myChart"></canvas>
+      <canvas id="beautyChart"></canvas>
     </div>
   </div>
 
   <!--div for fortune ticket print out screen-->
-  <div class="container">
+  <div class="container" id="final-ticket">
     <!--adding just divs to hold fortunes again may add extra design elements later on-->
-    <div id="love-life-ticket"></div>
-    <div id="future-happiness-ticket"></div>
     <div id="advice-ticket"></div>
+    <table class="table table-sm table-hover" id="emotion-readout">
+      <thead>
+        <tr>
+          <th scope="col">Anger</th>
+          <th scope="col">Disgust</th>
+          <th scope="col">Fear</th>
+          <th scope="col">Happiness</th>
+          <th scope="col">Neutral</th>
+          <th scope="col">Sadness</th>
+          <th scope="col">Surprised</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
     <div id="lottery-ticket"></div>
+    <!--A button to print the results-->
+    <button onclick="printFunction()"> <i class="fa fa-print" style="color:red; font-size: 30px;"></i></button>
   </div>
 
-  <!-- canvas to display the Chart-->
-  <canvas id="myChart"></canvas>
-  <canvas id="beautyChart"></canvas>
+  </div>
 
-  <!--A button to print the results-->
-  <button onclick="printFunction()"> <i class="fa fa-print" style="color:red; font-size: 30px;"></i></button>
+  
+
+  
 
   <!--Cloudinary-->
   <script src="https://widget.cloudinary.com/v2.0/global/all.js" type="text/javascript"></script>
