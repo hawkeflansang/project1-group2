@@ -1,6 +1,8 @@
 # FORTUNE TELLER
 ![Alt Text](https://media.giphy.com/media/TKjro9r9pf6YkhPSbp/giphy.gif)
 
+
+
 ### Overview
 Detect and analyze human faces within the image that you provided. Detect API can analyze detected faces directly, providing face landmarks and attributes information. User is given information from the fortune teller about their 
 * Emotions
