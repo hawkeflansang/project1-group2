@@ -180,7 +180,7 @@ const widget = cloudinary.createUploadWidget(
         }
         else {
           var skinHealthDiv = $("<h1>");
-          skinHealthDiv.text("Your sYou have Try using L'Oreal skin care moisturizer!");
+          skinHealthDiv.text("Your skin is average. You should try using L'Oreal skin care moisturizer!");
           $("#advice-fortune").append(skinHealthDiv);
           var healthySkin = false; // a boolean for healthy skin, used to help calculate life expectancy
           console.log(skinHealth);
