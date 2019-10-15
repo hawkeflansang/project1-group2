@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <!--Title-->
+  <title>Face Fortune</title>
+
+
+  <!--Chart.js-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.css"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+
+  <!-- Bootstrap File -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <!--// Firebase!-->
+  <script src="https://www.gstatic.com/firebasejs/7.1.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.1.0/firebase-database.js"></script>
+
+
+</head>
+
+<header>
+  <h1>Face Fortune</h1>
+</header>
+
+<body>
+  <!--div for first screen: display just fortune teller and img input fields-->
+  <div class="container">
+    <img src="#" class="teller-image">
+    <input type="submit" id="add-image" value="Tell Me My Fortune">
+  </div>
+
+  <!--div for second screen: fortune teller and user image above fortunes being told-->
+  <div class="container">
+    <!--display image of fortune teller and image at top of page-->
+    <div class="row">
+      <img src="#" class="teller-image">
+      <div id="userDisplay">
+      </div>
+    </div>
+
+    <!--div for fortunes to be dynamicly added to-->
+    <div class="row">
+      <div id="love-life-fortune"></div>
+      <div id="future-happiness-fortune"></div>
+      <div class="giveAdvice" id="advice-fortune"></div>
+      <div id="lottery-fortune"></div>
+    </div>
+  </div>
+
+  <!--div for fortune ticket print out screen-->
+  <div class="container">
+    <!--adding just divs to hold fortunes again may add extra design elements later on-->
+    <div id="love-life-ticket"></div>
+    <div id="future-happiness-ticket"></div>
+    <div id="advice-ticket"></div>
+    <div id="lottery-ticket"></div>
+  </div>
+
+  <!-- canvas to display the Chart-->
+  <canvas id="myChart"></canvas>
+  <canvas id="beautyChart"></canvas>
+
+  <!--Cloudinary-->
+  <script src="https://widget.cloudinary.com/v2.0/global/all.js" type="text/javascript"></script>
+
+  <!--Jquery-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+  <!--JS File-->
+  <script src="./app.js"></script>
+</body>
