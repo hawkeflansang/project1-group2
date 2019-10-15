@@ -1,4 +1,3 @@
-
 // Initialize Firebase
 var fireBaseConfig = {
   apiKey: "AIzaSyBh9sM9L8VJMXRhvYBCF7sps-TWicxoEXI",
@@ -15,8 +14,7 @@ firebase.initializeApp(fireBaseConfig);
 // Get a reference to the database service
 var database = firebase.database();
 
-//CLoudinary :
-
+//Cloudinary :
 const widget = cloudinary.createUploadWidget(
   {
     cloudName: "drikec4ti",
@@ -217,11 +215,38 @@ const widget = cloudinary.createUploadWidget(
   }
 );
 
+  // Advice
+//   function giveAdvice() {
+//   var adviceURL = "https://api.adviceslip.com/advice";
+//   $.ajax({
+//     url: adviceURL,
+//     method: "GET"
+// }).then(function(response) {
+//     var results = response;
+//     $("#advice-ticket").append(response)
+//     return results;
+// })
+// }
+
+  // Fortune
+  function fortuneTelling(){
+
+  var min=0; 
+  var max=50;  
+  var randomNumber = Math.floor(Math.random() * (+max - +min) + +min);
+  var fortuneURL = "http://fortunecookieapi.herokuapp.com/v1/fortunes?limit=1&skip=" + randomNumber + "&page=" + randomNumber;
+  console.log(fortuneURL)
+  $.ajax({
+    url: fortuneURL,
+    method: "GET"
+  }).then(function(response) {
+    $("#advice-ticket").append(response[0].message);
+  })
+}
 
 // An on click function to make an AJAX call and set the image URL as 
 $("#add-image").on("click", function (event) {
   widget.open();
-
-
-
+  $("#advice-ticket").empty();
+  fortuneTelling();
 });
