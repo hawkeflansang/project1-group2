@@ -2,7 +2,7 @@
 /////////填写你的apikey
 
 const APIKEY = 'YOUR APIKEY';
-const APISERET = 'YOUR APISERET';
+const APISECRET = 'YOUR APISERET';
 
 //////////////////
 
@@ -48,7 +48,7 @@ function resetContainer() {
     if (isMb == false) {// pc or ipad
         container.style.width = "375px";
         container.style.height = '667px';
-        container.style.top = ((screenH - 667) / 2) +  "px";
+        container.style.top = ((screenH - 667) / 2) + "px";
         console.log(container.style.top);
         container.backgroundColor = 'red';
     }

@@ -15,7 +15,7 @@ firebase.initializeApp(fireBaseConfig);
 // Get a reference to the database service
 var database = firebase.database();
 
-//CLoudinary :
+//Cloudinary is used to upload the user image :
 
 const widget = cloudinary.createUploadWidget(
   {
@@ -56,7 +56,7 @@ const widget = cloudinary.createUploadWidget(
       // display the user image and append it to a div
       var userImage = $("<img>");
       userImage.attr("src", imageURL);
-      $("#userDisplay").append(userImage);
+      $("#userDisplay").append("<br>" + userImage + "<br>");
 
       //api key from rapidapi for faceplusplus
       var settings = {
@@ -220,6 +220,8 @@ const widget = cloudinary.createUploadWidget(
 
 // An on click function to make an AJAX call and set the image URL as 
 $("#add-image").on("click", function (event) {
+  $("#advice-fortune").empty();
+  $("#userDisplay").empty();
   widget.open();
 
 
