@@ -248,8 +248,8 @@ const widget = cloudinary.createUploadWidget(
         $("#advice-fortune").empty();
         document.getElementById("myChart").style.visibility = "hidden";
         document.getElementById("beautyChart").style.visibility = "visible";
-        $("#advice-ticket").append("<h3>Chance for Love: " + averageScore + "%</h3>");
-        $("#advice-ticket").append("<h3>Chance of Loneliness: " + averageScoreDifference + "%</h3>");
+        $("#advice-ticket").append("<h3>Chance for Love: " + Math.ceil(averageScore) + "%</h3>");
+        $("#advice-ticket").append("<h3>Chance of Loneliness: " + Math.floor(averageScoreDifference) + "%</h3>");
       }, 13000);
 
       var takeTicket = setTimeout(function() {
