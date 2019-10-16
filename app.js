@@ -103,8 +103,8 @@ const widget = cloudinary.createUploadWidget(
         var myChart = document.getElementById('myChart').getContext('2d');
         //Global options
         Chart.defaults.global.defaultFontFamily = 'Lato';
-        Chart.defaults.global.defaultFontSize = 18;
-        Chart.defaults.global.defaultFontColor = '#777';
+        Chart.defaults.global.defaultFontSize = 20;
+        Chart.defaults.global.defaultFontColor = '#f9a825';
 
         //values for the data will be updated from the server
         var emotionChart = new Chart(myChart, {
@@ -117,22 +117,22 @@ const widget = cloudinary.createUploadWidget(
               data: [anger, disgust, fear, happiness, neutral, sadness, surprised],
 
               backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)',
-                'rgba(75, 192, 192, 0.2)'
+                'rgba(249, 168, 37, 0.75)',
+                'rgba(249, 168, 37, 0.75)',
+                'rgba(249, 168, 37, 0.75)',
+                'rgba(249, 168, 37, 0.75)',
+                'rgba(249, 168, 37, 0.75)',
+                'rgba(249, 168, 37, 0.75)',
+                'rgba(249, 168, 37, 0.75)'
               ],
               borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)',
-                'rgba(75, 192, 192, 1)'
+                'rgba(249, 168, 37, 1)',
+                'rgba(249, 168, 37, 1)',
+                'rgba(249, 168, 37, 1)',
+                'rgba(249, 168, 37, 1)',
+                'rgba(249, 168, 37, 1)',
+                'rgba(249, 168, 37, 1)',
+                'rgba(249, 168, 37, 1)'
               ],
               borderWidth: 2,
               hoverBorderWidth: 3,
@@ -148,8 +148,8 @@ const widget = cloudinary.createUploadWidget(
         var myChart = document.getElementById('beautyChart').getContext('2d');
         //Global options
         Chart.defaults.global.defaultFontFamily = 'Lato';
-        Chart.defaults.global.defaultFontSize = 18;
-        Chart.defaults.global.defaultFontColor = '#777';
+        Chart.defaults.global.defaultFontSize = 20;
+        Chart.defaults.global.defaultFontColor = '#f9a825';
 
         //values for the data will be updated from the server
         var beautyChart = new Chart(myChart, {
@@ -161,8 +161,8 @@ const widget = cloudinary.createUploadWidget(
               data: [averageScore, averageScoreDifference],
 
               backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 99, 132, 0.75)',
+                'rgba(0, 0, 0, 0.50)',
                 'rgba(255, 206, 86, 0.2)',
                 'rgba(75, 192, 192, 0.2)',
                 'rgba(153, 102, 255, 0.2)',
@@ -171,7 +171,7 @@ const widget = cloudinary.createUploadWidget(
               ],
               borderColor: [
                 'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
+                'rgba(0, 0, 0, 1)',
                 'rgba(255, 206, 86, 1)',
                 'rgba(75, 192, 192, 1)',
                 'rgba(153, 102, 255, 1)',
@@ -180,7 +180,7 @@ const widget = cloudinary.createUploadWidget(
               ],
               borderWidth: 2,
               hoverBorderWidth: 3,
-              hoverBorderColor: 'yellow'
+              hoverBorderColor: 'rgba(255, 99, 132, 1)'
 
             }]
           },
@@ -194,7 +194,9 @@ const widget = cloudinary.createUploadWidget(
             var skinHealthDiv = $("<h1>");
             skinHealthDiv.text("Your skin is very healthy! Wow!");
             $("#advice-fortune").empty();
+            document.getElementById("myChart").style.visibility = "hidden"
             $("#advice-fortune").append(skinHealthDiv);
+            $("#advice-ticket").append("<h3>Healthy Skin means a Happy You!</h3>");
             healthySkin = true; // a boolean for healthy skin, used to help calculate life expectancy
             console.log(skinHealth);
           }
@@ -202,21 +204,23 @@ const widget = cloudinary.createUploadWidget(
             var skinHealthDiv = $("<h1>");
             skinHealthDiv.text("Your skin is average. You should try using L'Oreal skin care moisturizer!");
             $("#advice-fortune").empty();
+            document.getElementById("myChart").style.visibility = "hidden"
             $("#advice-fortune").append(skinHealthDiv);
+            $("#advice-ticket").append("<h3>What's bad will get worse. Moisturize!!</h3>");
             healthySkin = false; // a boolean for healthy skin, used to help calculate life expectancy
             console.log(skinHealth);
-          }}, 9000)
+          }}, 10000)
 
         // Displays the age of a person
         var yourAge = $("<h1>");
         yourAge.text("You are " + age + " years old!");
         var callAge = setTimeout(function() {
             $("#advice-fortune").append(yourAge);
-            $("#advice-ticket").append("Your Age:" + age);
-          }, 3000);
+            $("#advice-ticket").append("<h3>Your Age: " + age + "</h3>");
+          }, 1000);
 
         // Displays the number of years left to live
-        var yearsLeft = $("<h2>");
+        var yearsLeft = $("<h1>");
 
         // make life expectancy shorter or longer based on skin health
         var callTimeLeft = setTimeout(function() {
@@ -225,6 +229,7 @@ const widget = cloudinary.createUploadWidget(
             yearsLeft.text("You have " + yearsLeftToLive + " years left to live!");
             $("#advice-fortune").empty();
             $("#advice-fortune").append(yearsLeft);
+            $("#advice-ticket").append("<h3>Years Left: " + yearsLeftToLive + "</h3>");
           }
           else
           { // if skin is unhealthy the range is lower
@@ -232,21 +237,26 @@ const widget = cloudinary.createUploadWidget(
             yearsLeft.text("You have " + yearsLeftToLive + " years left to live!");
             $("#advice-fortune").empty();
             $("#advice-fortune").append(yearsLeft);
-          }}, 6000);
+            $("#advice-ticket").append("<h3>Years Left: " + yearsLeftToLive + "</h3>");
+          }}, 3000);
       var callEmotions = setTimeout(function() {
           $("#advice-fortune").empty();
           document.getElementById("myChart").style.visibility = "visible";
-      }, 12000);
+      }, 6000);
 
       var callBeauty = setTimeout(function() {
+        $("#advice-fortune").empty();
         document.getElementById("myChart").style.visibility = "hidden";
         document.getElementById("beautyChart").style.visibility = "visible";
-      }, 18000);
+        $("#advice-ticket").append("<h3>Chance for Love: " + Math.ceil(averageScore) + "%</h3>");
+        $("#advice-ticket").append("<h3>Chance of Loneliness: " + Math.floor(averageScoreDifference) + "%</h3>");
+      }, 13000);
 
       var takeTicket = setTimeout(function() {
         document.getElementById("beautyChart").style.visibility = "hidden";
         document.getElementById("take-ticket").style.visibility = "visible";
-      },24000);
+        $("#instructions").text("Click the ticket to grab your fortune");
+      },17000);
       })
       // Call the fortune teller API
       fortuneTelling();
@@ -265,7 +275,8 @@ const widget = cloudinary.createUploadWidget(
       url: fortuneURL,
       method: "GET"
     }).then(function(response) {
-      $("#advice-ticket").append(response[0].message);
+      $("#advice-ticket").append("<h2>Final Fortune:</h2>");
+      $("#advice-ticket").append("<h3>" + response[0].message + "</h3>");
     })
   }
   
@@ -274,12 +285,14 @@ const widget = cloudinary.createUploadWidget(
     widget.open();
     document.getElementById("opening-screen").style.visibility = "hidden";
     document.getElementById("fortune-screen").style.visibility = "visible";
+    $("#instructions").text("");
   });
 
   $("#take-ticket").on("click", function(event) {
     document.getElementById("fortune-screen").style.visibility = "hidden";
     document.getElementById("final-ticket").style.visibility = "visible";
     document.getElementById("take-ticket").style.visibility = "hidden";
+    document.getElementById("instructions").style.visibility = "hidden";
   })
 
 // print button

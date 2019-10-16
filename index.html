@@ -29,6 +29,7 @@
 
 <header>
   <h1>Face Fortune</h1>
+  <h3 id="instructions">Click the crystal ball and upload an image to get your fortune</h3>
 </header>
 
 <body>
@@ -37,24 +38,24 @@
 
   <div class="container" id="opening-screen">
     <img src="images/foretuneOn.gif" class="teller-image" id="opening-image">
-    <input type="image" src="images/crystalBall.png" id="add-image" value="Tell Me My Fortune">
+    <input type="image" src="images/crystalFinal.png" id="add-image" value="Tell Me My Fortune">
   </div>
 
   <!--div for second screen: fortune teller and user image above fortunes being told-->
   <div class="container" id="fortune-screen">
     <!--display image of fortune teller and image at top of page-->
     <div class="row">
-      <img src="images/foretuneTelling.gif" class="teller-image" id="fortune-image">
-      <div id="userDisplay">
+      <div class="col-md-6"><img src="images/foretuneTelling.gif" class="teller-image" id="fortune-image"></div>
+      <div id="userDisplay" class="col-md-6">
       </div>
     </div>
 
     <!--div for fortunes to be dynamicly added to-->
     <div class="row">
-      <div><input type="image" src="images/crystalBall.png" id="take-ticket"></div>
+      <div id="ticket-button" class="col-md-12"><input type="image" src="images/ticket.png" id="take-ticket"></div>
       <div id="love-life-fortune"></div>
       <div id="future-happiness-fortune"></div>
-      <div class="giveAdvice" id="advice-fortune"></div>
+      <div class="giveAdvice col-md-12" id="advice-fortune"></div>
       <div id="lottery-fortune"></div>
       <!-- canvas to display the Chart-->
       <canvas id="myChart"></canvas>
