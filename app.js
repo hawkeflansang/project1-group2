@@ -223,7 +223,11 @@ const widget = cloudinary.createUploadWidget(
             var skinHealthDiv = $("<h1>");
             skinHealthDiv.text("Your skin is very healthy! Wow!");
             $("#advice-fortune").empty();
+            document.getElementById("myChart").style.visibility = "hidden";
             $("#advice-fortune").append(skinHealthDiv);
+            $("#advice-ticket").append(
+              "<h3>Healthy Skin means a Happy You!</h3>"
+            );
             healthySkin = true; // a boolean for healthy skin, used to help calculate life expectancy
             console.log(skinHealth);
           } else {
@@ -232,7 +236,11 @@ const widget = cloudinary.createUploadWidget(
               "Your skin is average. You should try using L'Oreal skin care moisturizer!"
             );
             $("#advice-fortune").empty();
+            document.getElementById("myChart").style.visibility = "hidden";
             $("#advice-fortune").append(skinHealthDiv);
+            $("#advice-ticket").append(
+              "<h3>What's bad will get worse. Moisturize!!</h3>"
+            );
             healthySkin = false; // a boolean for healthy skin, used to help calculate life expectancy
             console.log(skinHealth);
           }
@@ -247,7 +255,7 @@ const widget = cloudinary.createUploadWidget(
         }, 3000);
 
         // Displays the number of years left to live
-        var yearsLeft = $("<h2>");
+        var yearsLeft = $("<h1>");
 
         // make life expectancy shorter or longer based on skin health
         var callTimeLeft = setTimeout(function() {

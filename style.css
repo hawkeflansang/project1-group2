@@ -2,6 +2,7 @@ body {
     background: linear-gradient(#4c1c54, #8b3b99 ) no-repeat center center fixed;
     background-size: cover;
     color: #f9a825;
+    font-family: lato;
 }
 
 header {
@@ -17,9 +18,13 @@ header {
     overflow: auto;
 }
 
-#hold{
+#hold {
     margin-right: auto;
     margin-left: auto;
+}
+
+#ticket-instruct {
+    visibility: hidden;
 }
 
 #opening-screen {
@@ -54,17 +59,38 @@ header {
 }
 
 #fortune-image {
-    height: 300px;
+    height: 400px;
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 #user-image {
-    height: 300px;
+    height: 400px;
+    width: 600px;
+    margin: 20px;
+    display: inline-block;
 }
 
-#take-ticket{
+#ticket-button {
+    margin-left: auto;
+    margin-right: auto;
+    align-content: center;
+}
+
+#take-ticket {
     visibility: hidden;
-    position: absolute;
     z-index: 3;
+    height: 100px;
+    margin-right: auto;
+    margin-left: auto;
+    display: block;
+}
+
+#advice-fortune {
+    margin-right: auto;
+    margin-left: auto;
+    text-align: center;
 }
 
 #myChart {
@@ -83,4 +109,5 @@ header {
     visibility: hidden;
     position: absolute;
     z-index: 3;
+    align-content: center;
 }
