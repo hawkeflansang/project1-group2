@@ -129,3 +129,21 @@ It's that easy to get started using Chart.js! From here you can explore the many
 ![image](https://user-images.githubusercontent.com/52920074/66786411-399fb980-eeae-11e9-8ffe-ca80d3d08bc0.png)
 
 ![image](https://user-images.githubusercontent.com/52920074/66786472-6ce24880-eeae-11e9-9689-e5178c52f6a9.png)
+
+## Feedback and issues:
+
+I really appreciate your feedback. If you want to see some improvements in the app I'll be really grateful if you can drop me a message.
+
+Additionally, if you find any issue when running the app or any other other matter, please feel free to open an issue in this Github repo.
+
+Author - Keerthi, Manuel, Hawke & Shital
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE.md file for details
+
+## Acknowledgement
+
+Joe Han, Joshua Appel - Rutgers BCS Instructor and TA's
+
+All of the Rutgers BCS Classmates that help make everyday an amazing experience.
